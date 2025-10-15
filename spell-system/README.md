@@ -187,11 +187,18 @@ For implementation details, see individual file documentation.
 
 **Network**: Solana Mainnet
 **Deployed**: October 15, 2025
-**Latest Upgrade**: Token-2022 support, 10-day buffs, rune multipliers
+**Latest Upgrade**: Multiple Buffs Support (stack up to 4 buffs, max 2.85x multiplier)
 
 **Transaction History**:
 - Initial Deploy: `t7G7h7t9yjxjKaL49tFsz5i9NxPy4bJ31Hv3Dd47ytQr24xLy5YmGBhTmvUBB7LtLGKf8LsqS2WmbeF9P93H1ys`
 - Token-2022 Upgrade: `3eEM5gtEPLJEeEKa7oxqYM8LSuS3Ji8Wwun11KL4Rit7qQ7NvqR8p5LHBhQrH7rQzgnkBNLK9N7jy7GvwNcJVgTX`
+- Multiple Buffs Update: `2UciVDn85CB15PxqRZTrD6x8SbDNM6PG7n8uAeboQq2q3WAVDpa1HceiMA1ufcQEBuE85v2xP4v96QBcWb46fjmA`
+
+**New Features**:
+- Users can now cast one spell of each tier simultaneously
+- Buffs stack: Novice (+0.10) + Adept (+0.25) + Master (+0.50) + Legendary (+1.00) = **2.85x max**
+- Each tier tracked independently with separate 10-day expiry
+- Account migration function for existing users
 
 ---
 
