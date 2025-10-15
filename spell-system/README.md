@@ -120,6 +120,14 @@ Phase 2 creates a flywheel:
 
 ---
 
+## Integration Requirements
+
+The distribution system requires these helper modules:
+- `convex-token-tracker.ts` - Database functions for tracking distributions
+- `spell-multiplier-reader.ts` - Located in `spell-system/scripts/`
+
+Make sure to adjust import paths in `distribute-tokens.ts` based on your project structure.
+
 ## Integration with Distribution
 
 The distribution script reads user multipliers from the spell program:

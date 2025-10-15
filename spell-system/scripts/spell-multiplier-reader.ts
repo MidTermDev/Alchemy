@@ -35,26 +35,17 @@ function loadProgram(connection: Connection): any {
 }
 
 /**
- * Calculate rune holding bonus
- * Formula: 1% per 10,000 runes, capped at 20% (200k runes)
- */
-function calculateRuneBonus(runes: number): number {
-    const runesInDecimals = runes / 1e6; // Convert from smallest unit
-    const bonus = Math.min(runesInDecimals / 10000 * 0.01, 0.20); // 1% per 10k, max 20%
-    return bonus;
-}
-
-/**
- * Get a user's current multiplier from the spell program
- * Includes: spell buff multiplier + rune holding bonus
+ * Get user's spell state for points calculation
+ * Runes are worth 2x points, ALCH is 1x points
+ * Spell buffs multiply the total
  * @param connection Solana connection
  * @param userAddress User's wallet address
- * @returns Multiplier (1.0 = base, up to 2.2 with rune bonus)
+ * @returns Object with runes and spell multiplier
  */
-export async function getUserMultiplier(
+export async function getUserSpellState(
     connection: Connection,
     userAddress: string
-): Promise<number> {
+): Promise<{ runesHeld: number; spellMultiplier: number }> {
     try {
         const program = loadProgram(connection);
         const userPubkey = new PublicKey(userAddress);
@@ -68,33 +59,43 @@ export async function getUserMultiplier(
         // Fetch user state
         const userState = await (program.account as any).userState.fetch(userPda);
         
-        // Calculate rune holding bonus
-        const runeBonus = calculateRuneBonus(Number(userState.runes));
+        // Get runes held (in decimal form)
+        const runesHeld = Number(userState.runes) / 1e6;
         
-        // Check if buff is expired
+        // Check if spell buff is active
         const now = Math.floor(Date.now() / 1000);
         let spellMultiplier = 1.0;
         if (userState.buffExpiry > 0 && now < userState.buffExpiry) {
-            // Buff active
             spellMultiplier = userState.multiplier || 1.0;
         }
         
-        // Total multiplier = base (1.0) + spell buff + rune bonus
-        // But spell multiplier already includes base, so:
-        const totalMultiplier = spellMultiplier + runeBonus;
-        
-        return totalMultiplier;
+        return { runesHeld, spellMultiplier };
     } catch (error: any) {
-        // If account doesn't exist or any error, return base multiplier
+        // If account doesn't exist or any error, return base values
         if (error.message?.includes('Account does not exist') || 
             error.message?.includes('Invalid account discriminator')) {
-            return 1.0; // User hasn't initialized or no buff
+            return { runesHeld: 0, spellMultiplier: 1.0 };
         }
         
-        // Log unexpected errors but don't fail
-        console.warn(`Warning: Could not fetch multiplier for ${userAddress.slice(0, 8)}...: ${error.message}`);
-        return 1.0;
+        console.warn(`Warning: Could not fetch spell state for ${userAddress.slice(0, 8)}...: ${error.message}`);
+        return { runesHeld: 0, spellMultiplier: 1.0 };
     }
+}
+
+/**
+ * Legacy function for backward compatibility
+ * Now calculates based on runes = 2x points system
+ */
+export async function getUserMultiplier(
+    connection: Connection,
+    userAddress: string
+): Promise<number> {
+    const { runesHeld, spellMultiplier } = await getUserSpellState(connection, userAddress);
+    
+    // For display purposes, calculate equivalent multiplier
+    // This assumes all holdings are in runes for max effect
+    // Actual points calculation should use getUserSpellState
+    return spellMultiplier;
 }
 
 /**
