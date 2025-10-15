@@ -12,7 +12,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
 
-[🌐 Website](#) • [📖 Docs](#) • [💬 Community](#)
+[🌐 Website](https://alich.gold) • [📖 Docs](#) • [💬 Community](https://x.com/i/communities/1978345630406693026)
 
 </div>
 

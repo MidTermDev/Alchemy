@@ -24,7 +24,7 @@ const RPC_ENDPOINT = process.env.RPC_ENDPOINT || 'https://api.mainnet-beta.solan
 const KEYPAIR_PATH = process.env.KEYPAIR_DISTRO_PATH || 'keypair_distro.json';
 const DISTRIB_ACCOUNT = new PublicKey('C4EpXLwsJYezjRRRMQcSkmNSF9aT8YqR1bMxSKfQAC6Q');
 const GOLD_DECIMALS = 6;
-const MIN_DISTRIBUTION_AMOUNT = 0.00001;
+const MIN_DISTRIBUTION_AMOUNT = 0.0000001;
 const TRANSFERS_PER_TX = 3;
 const BATCH_SIZE = 6;
 
