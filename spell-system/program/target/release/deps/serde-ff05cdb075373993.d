@@ -1,0 +1,14 @@
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/deps/libserde-ff05cdb075373993.rmeta: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/integer128.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/de.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/ser.rs /home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/build/serde-7b503291191e9703/out/private.rs
+
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/deps/libserde-ff05cdb075373993.rlib: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/integer128.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/de.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/ser.rs /home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/build/serde-7b503291191e9703/out/private.rs
+
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/deps/serde-ff05cdb075373993.d: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/integer128.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/mod.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/de.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/ser.rs /home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/build/serde-7b503291191e9703/out/private.rs
+
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/lib.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/integer128.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/mod.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/de.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/private/ser.rs:
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/build/serde-7b503291191e9703/out/private.rs:
+
+# env-dep:OUT_DIR=/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/release/build/serde-7b503291191e9703/out

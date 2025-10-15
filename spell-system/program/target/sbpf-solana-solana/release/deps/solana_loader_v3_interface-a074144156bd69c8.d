@@ -1,0 +1,9 @@
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/sbpf-solana-solana/release/deps/libsolana_loader_v3_interface-a074144156bd69c8.rmeta: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/instruction.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/state.rs
+
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/sbpf-solana-solana/release/deps/libsolana_loader_v3_interface-a074144156bd69c8.rlib: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/instruction.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/state.rs
+
+/home/ubuntu/alch/alchemy-spells/programs/alchemy-spells/target/sbpf-solana-solana/release/deps/solana_loader_v3_interface-a074144156bd69c8.d: /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/lib.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/instruction.rs /home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/state.rs
+
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/lib.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/instruction.rs:
+/home/ubuntu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/solana-loader-v3-interface-5.0.0/src/state.rs:
