@@ -32,7 +32,7 @@ All operations run automatically every few minutes, ensuring consistent rewards 
 
 | Token | Contract Address | Type |
 |-------|------------------|------|
-| **$ALCH** (Snapshot Token) | `WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU` | SPL Token |
+| **$ALCH** (Snapshot Token) | `WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU` | Token-2022 Token |
 | **$GOLD** (Reward Token) | `GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A` | Reward Token |
 
 ## ✨ Features
