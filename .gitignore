@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+*.js
+*.js.map
+
+# Keypairs and secrets (NEVER commit these!)
+*.json
+!package.json
+!tsconfig.json
+!token-distribution-history.json.example
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Distribution history (comment out if you want to track it)
+# token-distribution-history.json

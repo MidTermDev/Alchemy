@@ -1,0 +1,71 @@
+name: Token Distribution
+
+on:
+  # Schedule (runs daily at midnight UTC)
+  schedule:
+    - cron: '0 0 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build TypeScript
+        run: npm run build
+      
+      - name: Create keypair file
+        run: echo '${{ secrets.DISTRIBUTOR_KEYPAIR }}' > keypair_distro.json
+        working-directory: src
+      
+      - name: Run distribution
+        run: node dist/distribute-tokens.js
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+      
+      - name: Upload distribution logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: distribution-logs
+          path: |
+            logs/*.log
+            token-distribution-history.json
+          retention-days: 30
+      
+      - name: Send Discord notification on success
+        if: success() && secrets.DISCORD_WEBHOOK != ''
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d '{"content":"✅ GOLD distribution completed successfully!"}' \
+               ${{ secrets.DISCORD_WEBHOOK }}
+      
+      - name: Send Discord notification on failure
+        if: failure() && secrets.DISCORD_WEBHOOK != ''
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d '{"content":"❌ GOLD distribution failed! Check the logs."}' \
+               ${{ secrets.DISCORD_WEBHOOK }}
+      
+      - name: Cleanup keypair
+        if: always()
+        run: rm -f src/keypair_distro.json
+
+# Required GitHub Secrets:
+# - DISTRIBUTOR_KEYPAIR: JSON array of your wallet's secret key
+# - RPC_URL: Your Solana RPC endpoint (optional, script has default)
+# - DISCORD_WEBHOOK: Discord webhook URL for notifications (optional)

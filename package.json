@@ -1,0 +1,43 @@
+{
+  "name": "alchemy-token-distributor",
+  "version": "1.0.0",
+  "description": "Automated Solana token distribution system for ALCHEMY GOLD",
+  "main": "dist/distribute-tokens.js",
+  "scripts": {
+    "build": "tsc",
+    "collect-fees": "tsx src/collect-fees.ts",
+    "swap": "tsx src/swap-sol-to-gold.ts",
+    "distribute": "tsx src/distribute-tokens.ts",
+    "start": "npm run build && node dist/distribute-tokens.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "solana",
+    "token",
+    "distribution",
+    "airdrop",
+    "alchemy",
+    "gold",
+    "spl-token",
+    "crypto"
+  ],
+  "author": "ALCHEMY Team",
+  "license": "MIT",
+  "dependencies": {
+    "@solana/web3.js": "^1.95.8",
+    "@solana/spl-token": "^0.4.9",
+    "@meteora-ag/cp-amm-sdk": "^1.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3",
+    "tsx": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/alchemy-token-distributor"
+  }
+}

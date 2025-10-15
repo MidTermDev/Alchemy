@@ -1,0 +1,28 @@
+{
+  "totalDistributed": 1000.50,
+  "distributions": [
+    {
+      "timestamp": "2025-01-15T00:00:00.000Z",
+      "totalAmount": 500.25,
+      "recipientCount": 150,
+      "txSignatures": [
+        "5wHu7QRGJxqVzX9...example1",
+        "2kPm8TYvZnBcR4...example2",
+        "7nQr3VXwPjDfS2...example3"
+      ],
+      "snapshotToken": "WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU",
+      "distributedToken": "GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A"
+    },
+    {
+      "timestamp": "2025-01-16T00:00:00.000Z",
+      "totalAmount": 500.25,
+      "recipientCount": 148,
+      "txSignatures": [
+        "9xTr5WQvPmKjL8...example4",
+        "4vPn2YXwZcBfR3...example5"
+      ],
+      "snapshotToken": "WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU",
+      "distributedToken": "GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A"
+    }
+  ]
+}
