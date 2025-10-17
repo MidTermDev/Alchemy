@@ -398,8 +398,8 @@ async function main() {
         });
         
         // Filter out dust amounts
-        const MIN_TOKENS = 0.00001;
-        const eligibleHolders = holders.filter(h => h.tokensToReceive >= MIN_TOKENS);
+        const MIN_POINTS = 1000;
+        const eligibleHolders = holders.filter(h => (h as any).points >= MIN_POINTS);
         const skippedDust = holders.length - eligibleHolders.length;
         
         if (skippedDust > 0) {
