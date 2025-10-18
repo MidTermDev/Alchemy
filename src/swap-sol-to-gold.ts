@@ -10,6 +10,7 @@ import * as path from 'path';
 
 const SOL_MINT = 'So11111111111111111111111111111111111111112';
 const GOLD_MINT = 'GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A';
+const SECONDARY_MINT = 'WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU';
 const JUPITER_API = 'https://lite-api.jup.ag/ultra/v1';
 const MIN_SOL_RESERVE = 1.0;
 const MIN_SWAP_THRESHOLD = 1.4;
@@ -72,42 +73,94 @@ async function swapSOLToGold() {
         return;
     }
     
-    const swapAmount = solBalance - MIN_SOL_RESERVE;
-    const swapAmountLamports = Math.floor(swapAmount * LAMPORTS_PER_SOL);
+    const totalSwapAmount = solBalance - MIN_SOL_RESERVE;
+    const totalSwapAmountLamports = Math.floor(totalSwapAmount * LAMPORTS_PER_SOL);
     
-    console.log(`Swapping: ${swapAmount.toFixed(4)} SOL`);
+    // Split: 90% to GOLD, 10% to secondary token
+    const goldSwapAmountLamports = Math.floor(totalSwapAmountLamports * 0.9);
+    const secondarySwapAmountLamports = Math.floor(totalSwapAmountLamports * 0.1);
+    
+    console.log(`Total swap: ${totalSwapAmount.toFixed(4)} SOL`);
+    console.log(`90% to GOLD: ${(goldSwapAmountLamports / LAMPORTS_PER_SOL).toFixed(4)} SOL`);
+    console.log(`10% to Secondary: ${(secondarySwapAmountLamports / LAMPORTS_PER_SOL).toFixed(4)} SOL`);
     console.log(`Reserve: ${MIN_SOL_RESERVE} SOL\n`);
     
-    console.log('Fetching swap quote...');
-    const quote = await fetchSwapQuote(SOL_MINT, GOLD_MINT, swapAmountLamports, walletAddress);
+    // ===== SWAP 1: 90% to GOLD =====
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('  SWAP 1: 90% to GOLD');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     
-    console.log(`Route: ${quote.router}`);
-    console.log(`Expected output: ${quote.outAmount} GOLD`);
-    console.log(`Slippage: ${quote.slippageBps} bps\n`);
+    console.log('Fetching swap quote...');
+    const goldQuote = await fetchSwapQuote(SOL_MINT, GOLD_MINT, goldSwapAmountLamports, walletAddress);
+    
+    console.log(`Route: ${goldQuote.router}`);
+    console.log(`Expected output: ${goldQuote.outAmount} GOLD`);
+    console.log(`Slippage: ${goldQuote.slippageBps} bps\n`);
     
     console.log('Signing transaction...');
-    const transactionBuffer = Buffer.from(quote.transaction, 'base64');
-    const transaction = VersionedTransaction.deserialize(transactionBuffer);
-    transaction.sign([wallet]);
+    const goldTransactionBuffer = Buffer.from(goldQuote.transaction, 'base64');
+    const goldTransaction = VersionedTransaction.deserialize(goldTransactionBuffer);
+    goldTransaction.sign([wallet]);
     
-    const signedTransaction = Buffer.from(transaction.serialize()).toString('base64');
+    const goldSignedTransaction = Buffer.from(goldTransaction.serialize()).toString('base64');
     
     console.log('Executing swap...');
-    const result = await executeSwap(signedTransaction, quote.requestId);
+    const goldResult = await executeSwap(goldSignedTransaction, goldQuote.requestId);
     
-    if (result.status === 'Success') {
-        console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('  ✅ Swap Successful');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log(`Output: ${result.outputAmountResult} GOLD`);
-        console.log(`Signature: ${result.signature}`);
-        console.log(`https://solscan.io/tx/${result.signature}\n`);
+    if (goldResult.status === 'Success') {
+        console.log('\n✅ GOLD swap successful');
+        console.log(`Output: ${goldResult.outputAmountResult} GOLD`);
+        console.log(`Signature: ${goldResult.signature}`);
+        console.log(`https://solscan.io/tx/${goldResult.signature}\n`);
     } else {
-        console.log(`\nSwap failed: ${result.error || 'Unknown error'}`);
-        if (result.signature) {
-            console.log(`https://solscan.io/tx/${result.signature}`);
+        console.log(`\n❌ GOLD swap failed: ${goldResult.error || 'Unknown error'}`);
+        if (goldResult.signature) {
+            console.log(`https://solscan.io/tx/${goldResult.signature}\n`);
+        }
+        console.log('⚠️  Continuing with secondary token swap...\n');
+    }
+    
+    // ===== SWAP 2: 10% to Secondary Token =====
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('  SWAP 2: 10% to Secondary Token');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    
+    console.log('Fetching swap quote...');
+    const secondaryQuote = await fetchSwapQuote(SOL_MINT, SECONDARY_MINT, secondarySwapAmountLamports, walletAddress);
+    
+    console.log(`Route: ${secondaryQuote.router}`);
+    console.log(`Expected output: ${secondaryQuote.outAmount}`);
+    console.log(`Slippage: ${secondaryQuote.slippageBps} bps\n`);
+    
+    console.log('Signing transaction...');
+    const secondaryTransactionBuffer = Buffer.from(secondaryQuote.transaction, 'base64');
+    const secondaryTransaction = VersionedTransaction.deserialize(secondaryTransactionBuffer);
+    secondaryTransaction.sign([wallet]);
+    
+    const secondarySignedTransaction = Buffer.from(secondaryTransaction.serialize()).toString('base64');
+    
+    console.log('Executing swap...');
+    const secondaryResult = await executeSwap(secondarySignedTransaction, secondaryQuote.requestId);
+    
+    if (secondaryResult.status === 'Success') {
+        console.log('\n✅ Secondary token swap successful');
+        console.log(`Output: ${secondaryResult.outputAmountResult}`);
+        console.log(`Signature: ${secondaryResult.signature}`);
+        console.log(`https://solscan.io/tx/${secondaryResult.signature}\n`);
+    } else {
+        console.log(`\n❌ Secondary token swap failed: ${secondaryResult.error || 'Unknown error'}`);
+        if (secondaryResult.signature) {
+            console.log(`https://solscan.io/tx/${secondaryResult.signature}\n`);
         }
     }
+    
+    // Final summary
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('  SWAP SUMMARY');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`GOLD Swap: ${goldResult.status === 'Success' ? '✅ Success' : '❌ Failed'}`);
+    console.log(`Secondary Token Swap: ${secondaryResult.status === 'Success' ? '✅ Success' : '❌ Failed'}`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 }
 
 if (require.main === module) {
